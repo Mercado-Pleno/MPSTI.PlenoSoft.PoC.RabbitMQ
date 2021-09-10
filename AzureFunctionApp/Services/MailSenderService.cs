@@ -14,10 +14,10 @@ namespace FunctionApp.Functions.Services
 			SendGridApiKey = configuration.GetValue<string>("SendGridApiKey");
 		}
 
-		public async Task<Response> Send(string plainTextContent, string sender)
+		public async Task<Response> Send(string plainTextContent)
 		{
 			var sendGridMessage = MailHelper.CreateSingleEmail(
-				from: new EmailAddress(sender, "Developer Test"),
+				from: new EmailAddress("developer-test@email-temp.com", "Developer Test"),
 				to: new EmailAddress("developer-test@email-temp.com", "Developer Test"), // https://generator.email/developer-test@email-temp.com
 				subject: "Sending Fibonacci Sequence with SendGrid is Fun",
 				plainTextContent,

@@ -23,11 +23,11 @@ namespace FunctionApp.Functions.Queue
 
 			var fibonacciService = new FibonacciService();
 			var fibonacciSequence = await fibonacciService.GerarAsync(relatorio.Quantidade);
-			var fibonacci = string.Join(", ", fibonacciSequence);
+			var fibonacciMessage = $"Firsts {relatorio.Quantidade} Fibonacci sequence is {string.Join(", ", fibonacciSequence)}";
 
-			var response = await MailSender.Send(fibonacci, "developer-test@mercadopleno.com.br");
+			var response = await MailSender.Send(fibonacciMessage);
 
-			log.LogInformation($"{context.FunctionName} - C# ServiceBus queue trigger function processed message: {fibonacci}. Send Mail: {response.IsSuccessStatusCode}");
+			log.LogInformation($"{context.FunctionName} - C# ServiceBus queue trigger function processed message: {fibonacciMessage}. Send Mail: {response.IsSuccessStatusCode}");
 		}
 	}
 }
