@@ -18,7 +18,7 @@ namespace FunctionApp.Functions.Services
 		{
 			var sendGridMessage = MailHelper.CreateSingleEmail(
 				from: new EmailAddress(sender, "Developer Test"),
-				to: new EmailAddress("developer-test@yt-google.com", "Developer Test"), // https://generator.email/developer-test@yt-google.com
+				to: new EmailAddress("developer-test@email-temp.com", "Developer Test"), // https://generator.email/developer-test@email-temp.com
 				subject: "Sending Fibonacci Sequence with SendGrid is Fun",
 				plainTextContent,
 				htmlContent: $"<strong>{plainTextContent}</strong>"
