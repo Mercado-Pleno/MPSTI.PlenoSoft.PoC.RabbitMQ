@@ -1,15 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Common
 {
 	public class FibonacciService
 	{
 		private static readonly Fibonacci _fibonacci = new Fibonacci();
-		public IEnumerable<long> Gerar(int count)
+
+		public IEnumerable<long> Gerar(int count) => GerarAsync(count).Result;
+
+		public async Task<IEnumerable<long>> GerarAsync(int count)
 		{
-			return _fibonacci.Get(count);
+			return await _fibonacci.Get(count);
 		}
 
 		public int Count()
@@ -37,13 +41,13 @@ namespace Common
 
 		public int Count() => _sequence.Count;
 
-		public IEnumerable<long> Get(int count)
+		public async Task<IEnumerable<long>> Get(int count)
 		{
-			Generate(count);
+			await Generate(count);
 			return _sequence.Take(count);
 		}
 
-		private void Generate(int count)
+		private async Task Generate(int count)
 		{
 			if (_sequence.Count <= count)
 			{
@@ -59,6 +63,7 @@ namespace Common
 					}
 					IsRunning = false;
 				}
+				await Task.Delay(500);
 			}
 		}
 
@@ -67,12 +72,6 @@ namespace Common
 			var n3 = N1 + N2;
 			N1 = N2;
 			return N2 = n3;
-		}
-
-		public static IEnumerable<long> GetSequence(int count)
-		{
-			var fibonacci = new Fibonacci();
-			return fibonacci.Get(count);
 		}
 	}
 }

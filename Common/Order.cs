@@ -97,7 +97,7 @@ namespace Common
 
 		public bool Active { get; set; }
 		private static int _id = 0;
-		private static readonly Random _random = new();
+		private static readonly Random _random = new Random();
 		private static readonly DateTime _date = DateTime.UtcNow.AddDays(-30);
 
 		public async Task Process()
